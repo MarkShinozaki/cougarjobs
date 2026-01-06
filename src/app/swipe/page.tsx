@@ -83,6 +83,7 @@ export default function SwipePage() {
                   job={job}
                   onSwipe={handleSwipe}
                   isTop={index === 0}
+                  index={index}
                 />
               ))
             ) : (

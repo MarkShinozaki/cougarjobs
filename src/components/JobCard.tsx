@@ -8,9 +8,10 @@ interface JobCardProps {
   job: Job;
   onSwipe: (direction: "left" | "right" | "up") => void;
   isTop: boolean;
+  index: number;
 }
 
-export function JobCard({ job, onSwipe, isTop }: JobCardProps) {
+export function JobCard({ job, onSwipe, isTop, index }: JobCardProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -34,15 +35,28 @@ export function JobCard({ job, onSwipe, isTop }: JobCardProps) {
   return (
     <motion.div
       className="absolute w-full cursor-grab active:cursor-grabbing"
-      style={{ x, y, rotateZ, opacity }}
+      style={{ 
+        x, 
+        y, 
+        rotateZ, 
+        opacity,
+        zIndex: 10 - index,
+        scale: 1 - index * 0.05,
+        translateY: index * 8,
+      }}
       drag={isTop}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={1}
       onDragEnd={handleDragEnd}
       initial={{ scale: 0.95, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ opacity: 0 }}
-      whileTap={{ scale: 1.02 }}
+      animate={{ 
+        scale: 1 - index * 0.05, 
+        opacity: 1 - index * 0.2,
+        y: index * 8,
+      }}
+      exit={{ x: 300, opacity: 0 }}
+      whileTap={{ scale: isTop ? 1.02 : 1 - index * 0.05 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
       <div className="relative bg-gradient-to-br from-cougar-dark to-cougar-dark/80 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
         {/* Swipe Indicators */}

@@ -1,15 +1,16 @@
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --cougar-crimson: #981e32;
-  --cougar-gray: #5e6a71;
-  --cougar-cream: #f7f5f0;
-  --cougar-gold: #c69214;
-  --cougar-dark: #1a1a1a;
+@theme {
+  --color-cougar-crimson: #981e32;
+  --color-cougar-gray: #5e6a71;
+  --color-cougar-cream: #f7f5f0;
+  --color-cougar-gold: #c69214;
+  --color-cougar-dark: #1a1a1a;
+
+  --font-family-display: "Clash Display", sans-serif;
+  --font-family-body: "Satoshi", sans-serif;
 }
 
 * {
@@ -25,31 +26,29 @@ body {
 }
 
 body {
-  font-family: "Satoshi", sans-serif;
-  background: var(--cougar-dark);
-  color: var(--cougar-cream);
+  font-family: var(--font-family-body);
+  background: var(--color-cougar-dark);
+  color: var(--color-cougar-cream);
 }
 
-@layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, var(--cougar-crimson) 0%, var(--cougar-gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+@utility text-gradient {
+  background: linear-gradient(135deg, var(--color-cougar-crimson) 0%, var(--color-cougar-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-  .glass {
-    background: rgba(30, 30, 30, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
+@utility glass {
+  background: rgba(30, 30, 30, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-  .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  .card-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(152, 30, 50, 0.15);
-  }
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(152, 30, 50, 0.15);
 }
