@@ -43,7 +43,7 @@ export default function AutoApplyPage() {
   const [applications] = useState<ApplicationStatus[]>(mockApplications);
 
   return (
-    <main className="min-h-screen pb-32">
+    <main className="min-h-screen pb-24 md:pb-32">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-600/10 via-cougar-dark to-cougar-dark" />
 
       <div className="relative z-10 container mx-auto px-6 py-12">

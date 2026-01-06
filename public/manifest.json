@@ -1,0 +1,22 @@
+{
+  "name": "CougarJobs",
+  "short_name": "CougarJobs",
+  "description": "Job resources, certifications, and smart job matching for WSU students",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#981e32",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -40,7 +40,7 @@ export default function SwipePage() {
   }, []);
 
   return (
-    <main className="min-h-screen pb-32 overflow-hidden">
+    <main className="min-h-screen pb-24 md:pb-32 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-600/10 via-cougar-dark to-cougar-dark" />
 
       <div className="relative z-10 container mx-auto px-6 py-8">
@@ -51,9 +51,9 @@ export default function SwipePage() {
           className="flex items-center justify-between mb-8"
         >
           <div>
-            <h1 className="font-display text-4xl font-bold mb-2">
-              <span className="text-gradient">Job Swipe</span>
-            </h1>
+          <h1 className="font-display text-3xl md:text-4xl font-bold mb-1 md:mb-2">
+            <span className="text-gradient">Job Swipe</span>
+          </h1>
             <p className="text-cougar-cream/60">
               {jobStack.length} jobs remaining · {likedJobs.length} liked
             </p>
@@ -74,7 +74,7 @@ export default function SwipePage() {
         </motion.div>
 
         {/* Card Stack */}
-        <div className="relative h-[600px] max-w-lg mx-auto">
+        <div className="relative h-[calc(100vh-220px)] md:h-[600px] max-w-lg mx-auto">
           <AnimatePresence>
             {jobStack.length > 0 ? (
               jobStack.slice(0, 3).map((job, index) => (
