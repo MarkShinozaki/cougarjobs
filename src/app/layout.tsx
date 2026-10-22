@@ -1,27 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "CougarJobs | WSU Career Resources",
-  description: "Job resources, certifications, and smart job matching for Washington State University students",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "CougarJobs",
-  },
-  formatDetection: {
-    telephone: false,
-  },
+  title: "CougarJobs | Jobs & networking for WSU Cougars",
+  description:
+    "Browse sample jobs in Seattle and the Pacific Northwest, and find relatable professionals to connect with on LinkedIn — built for Washington State University students.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  viewportFit: "cover",
-  themeColor: "#1a1a1a",
+  themeColor: "#981e32",
 };
 
 export default function RootLayout({
@@ -30,11 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="antialiased min-h-full h-full overflow-x-hidden">
-        <div className="min-h-full flex flex-col safe-area-inset">
-          {children}
-        </div>
+    <html lang="en">
+      <body className="page-shell min-h-screen antialiased">
+        <Header />
+        {children}
       </body>
     </html>
   );

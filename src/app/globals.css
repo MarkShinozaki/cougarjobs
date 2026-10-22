@@ -1,86 +1,123 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap');
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=cabinet-grotesk@500,700,800&display=swap");
 
 @import "tailwindcss";
 
 @theme {
-  --color-cougar-crimson: #981e32;
-  --color-cougar-gray: #5e6a71;
-  --color-cougar-cream: #f7f5f0;
-  --color-cougar-gold: #c69214;
-  --color-cougar-dark: #1a1a1a;
+  --color-crimson: #981e32;
+  --color-crimson-hover: #861a2c;
+  --color-crimson-dark: #6d1524;
+  --color-crimson-muted: #fce8ec;
 
-  --font-family-display: "Clash Display", sans-serif;
-  --font-family-body: "Satoshi", sans-serif;
+  --color-page: #f4f3f0;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f9f8f6;
+  --color-border: #e7e5e0;
+  --color-border-strong: #d6d3cc;
+
+  --color-ink: #0c0a09;
+  --color-ink-muted: #57534e;
+  --color-ink-faint: #a8a29e;
+
+  --font-family-display: "Cabinet Grotesk", system-ui, sans-serif;
+  --font-family-body: "Satoshi", system-ui, sans-serif;
+
+  --shadow-xs: 0 1px 2px rgb(12 10 9 / 0.04);
+  --shadow-sm: 0 1px 3px rgb(12 10 9 / 0.06), 0 1px 2px rgb(12 10 9 / 0.04);
+  --shadow-card: 0 0 0 1px rgb(12 10 9 / 0.03), 0 2px 4px rgb(12 10 9 / 0.02),
+    0 12px 32px rgb(12 10 9 / 0.06);
+  --shadow-card-hover: 0 0 0 1px rgb(12 10 9 / 0.04), 0 4px 8px rgb(12 10 9 / 0.04),
+    0 20px 48px rgb(12 10 9 / 0.08);
+  --shadow-button: 0 1px 2px rgb(109 21 36 / 0.2), 0 0 0 1px rgb(109 21 36 / 0.08),
+    inset 0 1px 0 rgb(255 255 255 / 0.12);
+  --shadow-button-hover: 0 4px 12px rgb(152 30 50 / 0.28), 0 0 0 1px rgb(109 21 36 / 0.12),
+    inset 0 1px 0 rgb(255 255 255 / 0.14);
+
+  --spacing-gutter: 1.5rem;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  -webkit-tap-highlight-color: transparent;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  overscroll-behavior: none;
-}
-
-html {
-  height: 100%;
-  height: -webkit-fill-available;
-}
-
-body {
-  font-family: var(--font-family-body);
-  background: var(--color-cougar-dark);
-  color: var(--color-cougar-cream);
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-}
-
-/* Safe area insets for notched devices */
-.safe-area-inset {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-}
-
-/* Touch-friendly tap targets */
-@media (pointer: coarse) {
-  button, a, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
+/*
+ * IMPORTANT: Do not use an unlayered `* { padding: 0 }` reset — it overrides
+ * Tailwind utilities because unlayered CSS beats @layer utilities in v4.
+ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
-}
 
-/* Prevent pull-to-refresh on mobile */
-@media screen and (max-width: 768px) {
+  html,
   body {
-    overscroll-behavior-y: contain;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-family-body);
+    background: var(--color-page);
+    color: var(--color-ink);
+    min-height: 100vh;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
-@utility text-gradient {
-  background: linear-gradient(135deg, var(--color-cougar-crimson) 0%, var(--color-cougar-gold) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+@layer components {
+  .app-container {
+    width: min(100%, 72rem);
+    margin-inline: auto;
+    padding-inline: max(var(--spacing-gutter), env(safe-area-inset-left, 0px))
+      max(var(--spacing-gutter), env(safe-area-inset-right, 0px));
+  }
+
+  @media (min-width: 640px) {
+    .app-container {
+      --spacing-gutter: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .app-container {
+      --spacing-gutter: 2.5rem;
+    }
+  }
 }
 
-@utility glass {
-  background: rgba(30, 30, 30, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.font-display {
+  font-family: var(--font-family-display);
 }
 
-.card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.page-shell {
+  position: relative;
+  min-height: 100vh;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(152, 30, 50, 0.15);
+.page-shell::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgb(152 30 50 / 0.07), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgb(152 30 50 / 0.04), transparent 50%),
+    var(--color-page);
+}
+
+.page-shell::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.45;
+  background-image: radial-gradient(rgb(12 10 9 / 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+}
+
+.text-balance {
+  text-wrap: balance;
 }
