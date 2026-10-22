@@ -1,144 +1,93 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Briefcase, Award, Sparkles, ArrowRight, GraduationCap } from "lucide-react";
-import { Navbar } from "@/components/Navbar";
+import { ArrowRight, Briefcase, Users } from "lucide-react";
+import { SampleBanner } from "@/components/SampleBanner";
 
-const features = [
+const paths = [
   {
+    href: "/jobs",
+    title: "Browse jobs",
+    description:
+      "Search roles in Seattle, Washington, Oregon, Idaho, and nearby — filter by remote, type, and keyword.",
     icon: Briefcase,
-    title: "Job Resources",
-    description: "Curated resources for your profession",
-    href: "/resources",
-    color: "from-cougar-crimson to-rose-600",
+    cta: "Open job board",
   },
   {
-    icon: Award,
-    title: "Certifications",
-    description: "Essential certifications to boost your career",
-    href: "/certifications",
-    color: "from-cougar-gold to-amber-500",
-  },
-  {
-    icon: Sparkles,
-    title: "Job Swipe",
-    description: "Swipe on jobs like Tinder",
-    href: "/swipe",
-    color: "from-violet-600 to-purple-500",
-  },
-  {
-    icon: GraduationCap,
-    title: "Auto Apply",
-    description: "AI-powered automatic job applications",
-    href: "/auto-apply",
-    color: "from-emerald-500 to-teal-500",
+    href: "/network",
+    title: "Find your people",
+    description:
+      "Pick an industry you relate to and jump to LinkedIn people search — with tips for reaching out as a Cougar.",
+    icon: Users,
+    cta: "Explore industries",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function Home() {
   return (
-    <main className="min-h-screen relative overflow-hidden pb-24 md:pb-32">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cougar-crimson/20 via-cougar-dark to-cougar-dark" />
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NCAwLTE4IDguMDYtMTggMThzOC4wNiAxOCAxOCAxOCAxOC04LjA2IDE4LTE4LTguMDYtMTgtMTgtMTh6bTAgMmMtOC44NCAwLTE2IDcuMTYtMTYgMTZzNy4xNiAxNiAxNiAxNiAxNi03LjE2IDE2LTE2LTcuMTYtMTYtMTYtMTZ6IiBzdHJva2U9IiM5ODFlMzIiIHN0cm9rZS1vcGFjaXR5PSIuMDUiLz48L2c+PC9zdmc+')] opacity-30" />
+    <main className="mx-auto max-w-5xl px-4 pb-16 pt-8 sm:px-6 sm:pt-12">
+      <section className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-10 shadow-card sm:px-10 sm:py-14">
+        <div
+          className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-crimson/5"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-crimson/5"
+          aria-hidden
+        />
 
-      <div className="relative z-10 container mx-auto px-6 py-16">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
-            <span className="w-2 h-2 bg-cougar-crimson rounded-full animate-pulse" />
-            <span className="text-sm text-cougar-cream/80">For WSU Cougars</span>
-          </div>
+        <p className="mb-3 inline-flex items-center rounded-full bg-crimson-soft px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crimson">
+          For WSU Cougars · No signup
+        </p>
 
-          <h1 className="font-display text-5xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-6 tracking-tight">
-            <span className="text-gradient">Cougar</span>
-            <span className="text-cougar-cream">Jobs</span>
-          </h1>
+        <h1 className="font-display max-w-xl text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-4xl md:text-5xl">
+          Jobs near Seattle.
+          <span className="text-crimson"> People worth knowing.</span>
+        </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-cougar-cream/60 max-w-2xl mx-auto mb-6 md:mb-8 font-body px-4">
-            Your AI-powered career companion. Find jobs, get certified, and land your dream position with smart automation.
-          </p>
+        <p className="mt-4 max-w-lg text-base text-ink-secondary sm:text-lg">
+          Two steps: find openings in the Northwest, then connect with professionals in fields you
+          care about — starting on LinkedIn.
+        </p>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/jobs"
+            className="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-crimson px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-crimson-dark"
           >
-            <Link
-              href="/swipe"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-cougar-crimson to-cougar-crimson/80 rounded-full text-lg font-semibold hover:shadow-lg hover:shadow-cougar-crimson/25 transition-all duration-300 group"
-            >
-              Start Swiping
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
-        </motion.div>
+            Browse jobs
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+          <Link
+            href="/network"
+            className="focus-ring inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-surface-elevated px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-crimson/30 hover:bg-crimson-soft/50"
+          >
+            Find people to connect with
+          </Link>
+        </div>
+      </section>
 
-        {/* Feature Cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto"
-        >
-          {features.map((feature) => (
-            <motion.div key={feature.title} variants={item}>
-              <Link href={feature.href} className="block h-full">
-                <div className="h-full p-4 md:p-6 rounded-2xl glass card-hover group cursor-pointer">
-                  <div className={`w-10 h-10 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform`}>
-                    <feature.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
-                  </div>
-                  <h3 className="font-display text-base md:text-xl font-semibold mb-1 md:mb-2">{feature.title}</h3>
-                  <p className="text-cougar-cream/50 text-xs md:text-sm hidden sm:block">{feature.description}</p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-12 md:mt-24 grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto text-center"
-        >
-          {[
-            { value: "10K+", label: "Jobs Listed" },
-            { value: "500+", label: "Certifications" },
-            { value: "95%", label: "Success Rate" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div className="font-display text-2xl md:text-4xl font-bold text-gradient">{stat.value}</div>
-              <div className="text-cougar-cream/40 text-xs md:text-sm mt-1">{stat.label}</div>
+      <section className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-6">
+        {paths.map(({ href, title, description, icon: Icon, cta }) => (
+          <Link
+            key={href}
+            href={href}
+            className="focus-ring group flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-card transition-all hover:border-crimson/20 hover:shadow-card-hover"
+          >
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-soft text-crimson transition-colors group-hover:bg-crimson group-hover:text-white">
+              <Icon className="h-6 w-6" aria-hidden />
             </div>
-          ))}
-        </motion.div>
-      </div>
+            <h2 className="font-display text-xl font-bold text-ink">{title}</h2>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-secondary">{description}</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-crimson">
+              {cta}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            </span>
+          </Link>
+        ))}
+      </section>
 
-      <Navbar />
+      <div className="mt-10">
+        <SampleBanner />
+      </div>
     </main>
   );
 }
