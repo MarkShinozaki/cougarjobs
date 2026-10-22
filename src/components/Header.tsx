@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Briefcase, Users } from "lucide-react";
+import { cn } from "@/lib/cn";
+import { Container } from "@/components/ui/container";
 
 const links = [
   { href: "/jobs", label: "Jobs", icon: Briefcase },
@@ -11,44 +13,47 @@ const links = [
 
 export function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:h-16 sm:px-6">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-surface/75 backdrop-blur-xl backdrop-saturate-150">
+      <Container className="flex h-[60px] items-center justify-between gap-6">
         <Link
           href="/"
-          className="font-display text-lg font-bold tracking-tight text-ink focus-ring rounded-sm sm:text-xl"
+          className="group flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson/40 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
         >
-          Cougar<span className="text-crimson">Jobs</span>
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-crimson text-sm font-bold text-white shadow-button">
+            C
+          </span>
+          <span className="font-display text-lg font-bold tracking-[-0.02em] text-ink">
+            Cougar<span className="text-crimson">Jobs</span>
+          </span>
         </Link>
 
-        <nav className="flex items-center gap-1 sm:gap-2" aria-label="Main">
+        <nav
+          className="flex items-center rounded-full border border-border bg-surface-muted/90 p-1 shadow-xs"
+          aria-label="Main"
+        >
           {links.map(({ href, label, icon: Icon }) => {
             const active = pathname === href || pathname.startsWith(`${href}/`);
             return (
               <Link
                 key={href}
                 href={href}
-                className={`focus-ring flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium transition-colors sm:px-4 ${
+                className={cn(
+                  "inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-medium transition-all duration-200",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crimson/40 focus-visible:ring-offset-2 focus-visible:ring-offset-page",
                   active
-                    ? "bg-crimson text-white"
-                    : "text-ink-secondary hover:bg-crimson-soft hover:text-crimson"
-                }`}
+                    ? "bg-surface text-ink shadow-sm"
+                    : "text-ink-muted hover:text-ink",
+                )}
               >
-                <Icon className="h-4 w-4 shrink-0" aria-hidden />
+                <Icon className="h-4 w-4 shrink-0 opacity-80" aria-hidden />
                 <span>{label}</span>
               </Link>
             );
           })}
         </nav>
-      </div>
-
-      {!isHome && (
-        <div className="border-t border-border bg-crimson-soft/50 px-4 py-1.5 text-center text-xs text-gray-wsu sm:text-sm">
-          Sample listings for demo — not a live job board or verified profiles.
-        </div>
-      )}
+      </Container>
     </header>
   );
 }

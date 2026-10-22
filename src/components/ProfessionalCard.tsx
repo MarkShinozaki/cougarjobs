@@ -1,4 +1,7 @@
 import { ExternalLink, MapPin, MessageCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import type { Professional } from "@/types";
 
 interface ProfessionalCardProps {
@@ -7,36 +10,39 @@ interface ProfessionalCardProps {
 
 export function ProfessionalCard({ professional }: ProfessionalCardProps) {
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-card transition-shadow hover:shadow-card-hover">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <span className="rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-amber-800">
-          {professional.label}
-        </span>
-        <span className="text-xs text-gray-muted">{professional.industry}</span>
+    <Card className="relative flex h-full flex-col overflow-hidden p-0 shadow-card transition-shadow duration-200 hover:shadow-card-hover">
+      <div className="h-1 bg-gradient-to-r from-crimson via-crimson/80 to-crimson/40" aria-hidden />
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <Badge variant="sample" className="normal-case tracking-normal">
+            {professional.label}
+          </Badge>
+          <span className="text-right text-xs font-medium text-ink-faint">{professional.industry}</span>
+        </div>
+
+        <h3 className="font-display text-xl font-bold tracking-[-0.02em] text-ink">{professional.role}</h3>
+        <p className="mt-1 text-sm text-ink-muted">{professional.companyExample}</p>
+
+        <p className="mt-3 inline-flex items-center gap-1.5 text-sm text-ink-muted">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-ink-faint" aria-hidden />
+          {professional.location}
+        </p>
+
+        <div className="mt-5 flex flex-1 gap-3 rounded-xl border border-border bg-surface-muted/50 p-4">
+          <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-crimson" aria-hidden />
+          <p className="text-sm leading-relaxed text-ink-muted">{professional.connectionTip}</p>
+        </div>
+
+        <ButtonLink
+          href={professional.linkedInSearchUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 w-full"
+        >
+          Search on LinkedIn
+          <ExternalLink className="h-4 w-4" aria-hidden />
+        </ButtonLink>
       </div>
-
-      <h3 className="font-display text-lg font-bold text-ink">{professional.role}</h3>
-      <p className="mt-1 text-sm text-ink-secondary">{professional.companyExample}</p>
-
-      <p className="mt-2 inline-flex items-center gap-1 text-sm text-gray-wsu">
-        <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden />
-        {professional.location}
-      </p>
-
-      <p className="mt-4 flex flex-1 gap-2 text-sm leading-relaxed text-ink-secondary">
-        <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-crimson" aria-hidden />
-        {professional.connectionTip}
-      </p>
-
-      <a
-        href={professional.linkedInSearchUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="focus-ring mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-crimson px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-crimson-dark"
-      >
-        Search on LinkedIn
-        <ExternalLink className="h-4 w-4" aria-hidden />
-      </a>
-    </article>
+    </Card>
   );
 }

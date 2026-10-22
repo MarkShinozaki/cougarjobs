@@ -2,6 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { ProfessionalCard } from "@/components/ProfessionalCard";
+import { Callout } from "@/components/ui/callout";
+import { Chip } from "@/components/ui/chip";
+import { Container } from "@/components/ui/container";
+import { PageHeader } from "@/components/ui/page-header";
 import { industries, professionals } from "@/lib/data";
 
 export default function NetworkPage() {
@@ -13,64 +17,49 @@ export default function NetworkPage() {
   }, [industry]);
 
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-6 sm:pt-8">
-      <div className="mb-8">
-        <h1 className="font-display text-2xl font-bold text-ink sm:text-3xl">
-          Connect with your industry
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm text-ink-secondary sm:text-base">
-          Choose a field that matches your goals. Each card opens a{" "}
-          <strong className="font-medium text-ink">LinkedIn people search</strong> — we don&apos;t
-          list real individuals here.
-        </p>
-      </div>
+    <main>
+      <Container className="pb-20 pt-8 sm:pt-10">
+        <PageHeader
+          eyebrow="Network"
+          title="Connect with your industry"
+          description="Each card opens a LinkedIn people search tailored to a role and region — plus a concise note you can adapt when you reach out."
+        />
 
-      <div className="mb-8">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-muted">
-          Industry
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => setIndustry("All industries")}
-            className={`focus-ring rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-              industry === "All industries"
-                ? "bg-crimson text-white"
-                : "border border-border bg-surface text-ink-secondary hover:border-crimson/30"
-            }`}
-          >
-            All industries
-          </button>
-          {industries.map((name) => (
-            <button
-              key={name}
-              type="button"
-              onClick={() => setIndustry(name)}
-              className={`focus-ring rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                industry === name
-                  ? "bg-crimson text-white"
-                  : "border border-border bg-surface text-ink-secondary hover:border-crimson/30"
-              }`}
+        <Callout className="mb-8" />
+
+        <div className="mb-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-faint">
+            Filter by industry
+          </p>
+          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0">
+            <Chip
+              selected={industry === "All industries"}
+              onClick={() => setIndustry("All industries")}
             >
-              {name}
-            </button>
-          ))}
+              All
+            </Chip>
+            {industries.map((name) => (
+              <Chip key={name} selected={industry === name} onClick={() => setIndustry(name)}>
+                {name}
+              </Chip>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <ul className="grid gap-4 sm:grid-cols-2 lg:gap-6">
-        {filtered.map((professional) => (
-          <li key={professional.id} className="min-h-0">
-            <ProfessionalCard professional={professional} />
-          </li>
-        ))}
-      </ul>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:gap-5">
+          {filtered.map((professional) => (
+            <li key={professional.id} className="min-h-0">
+              <ProfessionalCard professional={professional} />
+            </li>
+          ))}
+        </ul>
 
-      {filtered.length === 0 && (
-        <p className="rounded-2xl border border-dashed border-border py-12 text-center text-sm text-gray-wsu">
-          No sample searches for this industry yet.
-        </p>
-      )}
+        {filtered.length === 0 && (
+          <p className="rounded-2xl border border-dashed border-border-strong bg-surface py-16 text-center text-sm text-ink-muted">
+            No sample searches for this industry yet.
+          </p>
+        )}
+      </Container>
     </main>
   );
 }
