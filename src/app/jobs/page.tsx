@@ -65,7 +65,7 @@ export default function JobsPage() {
             </div>
 
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
+              <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
                 {jobStates.map(({ code, label }) => (
                   <Chip key={code} selected={state === code} onClick={() => setState(code)}>
                     {label}

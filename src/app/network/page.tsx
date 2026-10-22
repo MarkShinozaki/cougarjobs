@@ -31,7 +31,7 @@ export default function NetworkPage() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-faint">
             Filter by industry
           </p>
-          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0">
             <Chip
               selected={industry === "All industries"}
               onClick={() => setIndustry("All industries")}

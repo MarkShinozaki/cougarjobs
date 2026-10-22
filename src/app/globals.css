@@ -31,29 +31,58 @@
     inset 0 1px 0 rgb(255 255 255 / 0.12);
   --shadow-button-hover: 0 4px 12px rgb(152 30 50 / 0.28), 0 0 0 1px rgb(109 21 36 / 0.12),
     inset 0 1px 0 rgb(255 255 255 / 0.14);
+
+  --spacing-gutter: 1.5rem;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
+/*
+ * IMPORTANT: Do not use an unlayered `* { padding: 0 }` reset — it overrides
+ * Tailwind utilities because unlayered CSS beats @layer utilities in v4.
+ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-family-body);
+    background: var(--color-page);
+    color: var(--color-ink);
+    min-height: 100vh;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+@layer components {
+  .app-container {
+    width: min(100%, 72rem);
+    margin-inline: auto;
+    padding-inline: max(var(--spacing-gutter), env(safe-area-inset-left, 0px))
+      max(var(--spacing-gutter), env(safe-area-inset-right, 0px));
+  }
 
-body {
-  font-family: var(--font-family-body);
-  background: var(--color-page);
-  color: var(--color-ink);
-  min-height: 100vh;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @media (min-width: 640px) {
+    .app-container {
+      --spacing-gutter: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .app-container {
+      --spacing-gutter: 2.5rem;
+    }
+  }
 }
 
 .font-display {
